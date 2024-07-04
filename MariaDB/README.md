@@ -1,5 +1,5 @@
 
-## Automate chaning the mariadb config via AWS
+## Automate changing the mariadb config via AWS
 
 <br>
 
@@ -119,21 +119,40 @@ systemctl status amazon-ssm-agent
 
 ``` bash
 
-'#!/usr/bin/env bash'
-echo "testing" | tee -a /tmp/testing
-'# Stop the MariaDB service'
-sudo systemctl stop mariadb
-''
-'# Empty the configuration file'
-sudo sh -c '> /etc/my.cnf.d/mariadb-server.cnf'
-''
-'# Write the new configuration to the file'
-sudo tee /etc/my.cnf.d/mariadb-server.cnf > /dev/null <<EOL
-'[server]'
-''
-'[mysqld]'
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
+  - '#!/usr/bin/env bash'
+  - echo "testing" | tee -a /tmp/testing
+  - '# Stop the MariaDB service'
+  - sudo systemctl stop mariadb
+  - ''
+  - '# Empty the configuration file'
+  - sudo sh -c '> /etc/my.cnf.d/mariadb-server.cnf'
+  - ''
+  - '# Write the new configuration to the file'
+  - sudo tee /etc/my.cnf.d/mariadb-server.cnf > /dev/null <<EOL
+  - '[server]'
+  - ''
+  - '[mysqld]'
+  - datadir=/var/lib/mysql
+  - socket=/var/lib/mysql/mysql.sock
+  - log-error=/var/log/mariadb/mariadb.log
+  - pid-file=/run/mariadb/mariadb.pid
+  - ''
+  - '[galera]'
+  - bind-address=0.0.0.0
+  - ''
+  - '[embedded]'
+  - ''
+  - '[mariadb]'
+  - ''
+  - '[mariadb-10.5]'
+  - EOL
+  - ''
+  - echo "MariaDB configuration updated successfully." | tee -a /tmp/mariadb_status
+  - ''
+  - '# Start the MariaDB service'
+  - systemctl start mariadb
+  - ''
+  - echo "MariaDB service started successfully." | tee -a /tmp/mariadb_status
 
 ```
 
