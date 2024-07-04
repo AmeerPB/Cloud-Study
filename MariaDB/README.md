@@ -1,5 +1,6 @@
 
-## Automate changing the mariadb config via AWS
+> [!NOTE]
+> ## Automate changing the mariadb config via AWS
 
 <br>
 
