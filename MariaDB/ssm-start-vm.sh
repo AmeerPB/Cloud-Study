@@ -9,7 +9,9 @@ DATE=$(date +'%Y%m%d-%H%M%S')
 TAG_KEY="UAT"
 TAG_VALUE="Development"
 AUTOMATION_DOCUMENT_NAME="NewRunbook"
-
+MAX_CHECK_TIME=600  # 600 seconds = 10 minutes
+START_TIME=$(date +%s)
+STATUS="pending"
 
 
 
@@ -179,18 +181,41 @@ fi
 echo "Automation execution started successfully with execution ID: $AUTOMATION_EXECUTION_ID."
 
 
+# # Step 12: Wait for the automation execution to complete
+# echo "Waiting for automation execution $AUTOMATION_EXECUTION_ID to complete..."
+# aws ssm wait automation-execution-completed --automation-execution-id $AUTOMATION_EXECUTION_ID --region $REGION
+
+# if [ $? -ne 0 ]; then
+#     echo "Automation execution failed or timed out."
+#     exit 1
+# fi
+
+# echo "Automation execution $AUTOMATION_EXECUTION_ID completed successfully."
+
+
 # Step 12: Wait for the automation execution to complete
-echo "Waiting for automation execution $AUTOMATION_EXECUTION_ID to complete..."
-aws ssm wait automation-execution-completed --automation-execution-id $AUTOMATION_EXECUTION_ID --region $REGION
 
-if [ $? -ne 0 ]; then
-    echo "Automation execution failed or timed out."
-    exit 1
-fi
+while [ "$STATUS" != "Success" ]; do
+    CURRENT_TIME=$(date +%s)
+    ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
 
-echo "Automation execution $AUTOMATION_EXECUTION_ID completed successfully."
+    if [ $ELAPSED_TIME -gt $MAX_CHECK_TIME ]; then
+        echo "Maximum check time exceeded. Exiting."
+        exit 1
+    fi
 
-
+    STATUS=$(aws ssm get-automation-execution --automation-execution-id $AUTOMATION_EXECUTION_ID --query 'AutomationExecution.AutomationExecutionStatus' --output text)
+    
+    if [ "$STATUS" == "Success" ]; then
+        echo "Automation execution $AUTOMATION_EXECUTION_ID completed successfully."
+    elif [ "$STATUS" == "TimedOut" ]; then
+        echo "Automation execution $AUTOMATION_EXECUTION_ID timed out."
+        exit 1
+    else
+        echo "Automation execution $AUTOMATION_EXECUTION_ID is $STATUS. Checking again in 1 minute..."
+        sleep 60
+    fi
+done
 
 
 
