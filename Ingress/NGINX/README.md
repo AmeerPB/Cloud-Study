@@ -4,7 +4,7 @@
 > [!TIP]
 > 
 > ## Reference
-> YT **[Video](https://www.youtube.com/watch?v=g9EqZiTWLGA)**
+> YT [Video](https://www.youtube.com/watch?v=g9EqZiTWLGA)
 >
 > Forked from [here:](https://github.com/ascode-com/wiki/tree/main/ingress-nginx)
 >
