@@ -1,5 +1,5 @@
 
-# Back up ofStep 11 and 12 from the ssm-start-vm.sh script
+# Back up of Step 11 and 12 from the ssm-start-vm.sh script
 
 
 # Variables
