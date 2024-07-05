@@ -5,6 +5,17 @@
 <br>
 
 
+> [!TIP]
+> ### Reference
+> 
+> https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-statuses.html
+> https://docs.aws.amazon.com/cli/latest/reference/ssm/describe-automation-step-executions.html
+> https://docs.aws.amazon.com/cli/latest/reference/ssm/get-automation-execution.html
+
+
+
+
+
 ### Default mariadb config
 
 ``` bash
