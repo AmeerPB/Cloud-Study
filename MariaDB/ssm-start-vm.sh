@@ -148,7 +148,7 @@ echo "Current root volume $CURRENT_ROOT_VOLUME_ID detached."
 
 # Step 10: Attach the new volume to the instance-2 as the root volume
 echo "Attaching the new volume $NEW_VOLUME_ID as the root volume..."
-aws ec2 attach-volume --volume-id $NEW_VOLUME_ID --instance-id $INSTANCE_2_ID --device /dev/xvda1 --region $REGION
+aws ec2 attach-volume --volume-id $NEW_VOLUME_ID --instance-id $INSTANCE_2_ID --device /dev/xvda --region $REGION
 
 
 
