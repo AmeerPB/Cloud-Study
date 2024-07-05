@@ -194,6 +194,8 @@ echo "Automation execution started successfully with execution ID: $AUTOMATION_E
 
 
 # Step 12: Wait for the automation execution to complete
+# This loop will check for a total of 10 minute and will exit automatically 
+# Unless the exec status becoms "Success"
 
 while [ "$STATUS" != "Success" ]; do
     CURRENT_TIME=$(date +%s)
