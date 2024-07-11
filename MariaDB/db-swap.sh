@@ -3,14 +3,14 @@
  
 
 # Variables
-INSTANCE_ID="i-0b7eaf586ac937434"  # Replace with your test1 instance ID
-INSTANCE_2_ID="i-05ad250fb255a692c"
-VOLUME_ID="vol-09de63a4743c7d13b"  # Replace with your volume ID to snapshot
+INSTANCE_ID="i-ID"  # Replace with your test1 instance ID
+INSTANCE_2_ID="i-ID"
+VOLUME_ID="vol-ID"  # Replace with your volume ID to snapshot
 REGION="ap-south-1"                # Replace with your AWS region
 DATE=$(date +'%Y%m%d-%H%M%S')
 TAG_KEY="UAT"
 TAG_VALUE="Development"
-AUTOMATION_DOCUMENT_NAME="k8-uat-database-report-service"
+AUTOMATION_DOCUMENT_NAME="database-report-service"
 MAX_CHECK_TIME=600  # 600 seconds = 10 minutes
 START_TIME=$(date +%s)
 STATUS="pending"
