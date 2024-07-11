@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
- 
-
 # Variables
 INSTANCE_ID="i-ID"  # Replace with your test1 instance ID
 INSTANCE_2_ID="i-ID"
@@ -15,9 +13,7 @@ MAX_CHECK_TIME=600  # 600 seconds = 10 minutes
 START_TIME=$(date +%s)
 STATUS="pending"
 
- 
 
- 
 
 # Step 1: Create a snapshot of the volume
 echo "Creating snapshot of volume $VOLUME_ID..."
@@ -38,17 +34,12 @@ echo "Snapshot $SNAPSHOT_ID created successfully."
 
  
 
- 
-
 # Step 2: Tag the snapshot
 echo "Tagging snapshot $SNAPSHOT_ID..."
 aws ec2 create-tags --resources $SNAPSHOT_ID --tags Key=Name,Value="Snapshot-$DATE" Key=$TAG_KEY,Value=$TAG_VALUE --region $REGION
 
  
 
- 
-
- 
 
 # Step 3: Wait for the snapshot to complete
 echo "Waiting for snapshot $SNAPSHOT_ID to complete..."
@@ -64,10 +55,6 @@ fi
  
 
 echo "Snapshot $SNAPSHOT_ID completed."
-
- 
-
- 
 
  
 
@@ -88,10 +75,6 @@ echo "Existing volume $VOLUME_ID is in availability zone $AVAILABILITY_ZONE."
 
  
 
- 
-
- 
-
 # Step 5: Create a new gp3 volume from the snapshot in the same availability zone
 echo "Creating a new gp3 volume from snapshot $SNAPSHOT_ID in availability zone $AVAILABILITY_ZONE..."
 NEW_VOLUME_ID=$(aws ec2 create-volume --snapshot-id $SNAPSHOT_ID --volume-type gp3 --availability-zone $AVAILABILITY_ZONE --query VolumeId --output text --region $REGION)
@@ -109,18 +92,11 @@ echo "New volume $NEW_VOLUME_ID created successfully from snapshot $SNAPSHOT_ID.
 
  
 
- 
-
 # Step 6: Tag the new volume
 echo "Tagging new volume $NEW_VOLUME_ID..."
 aws ec2 create-tags --resources $NEW_VOLUME_ID --tags Key=Name,Value="Volume-$DATE" Key=$TAG_KEY,Value=$TAG_VALUE --region $REGION
 
  
-
- 
-
- 
-
 # Step 7: Wait for the new volume to become available
 echo "Waiting for the new volume $NEW_VOLUME_ID to become available..."
 aws ec2 wait volume-available --volume-ids $NEW_VOLUME_ID --region $REGION
@@ -136,22 +112,11 @@ fi
 
 echo "New volume $NEW_VOLUME_ID is now available."
 
- 
-
- 
-
- 
-
 # Step 8: Stop the instance 2
 echo "Stopping the instance $INSTANCE_2_ID..."
 aws ec2 stop-instances --instance-ids $INSTANCE_2_ID --region $REGION
 
  
-
- 
-
- 
-
 # Wait for the instance to stop
 aws ec2 wait instance-stopped --instance-ids $INSTANCE_2_ID --region $REGION
 
@@ -178,9 +143,6 @@ aws ec2 modify-instance-attribute --instance-id $INSTANCE_2_ID --instance-type "
 echo "Instance type changed to r6a.2xlarge."
 
  
-
- 
-
 # Step 9: Detach the current root volume
 echo "Detaching the current root volume..."
 CURRENT_ROOT_VOLUME_ID=$(aws ec2 describe-instances --instance-ids $INSTANCE_2_ID --region $REGION --query "Reservations[].Instances[].BlockDeviceMappings[?DeviceName=='/dev/sda1'].Ebs.VolumeId" --output text)
@@ -196,11 +158,6 @@ fi
 
 aws ec2 detach-volume --volume-id $CURRENT_ROOT_VOLUME_ID --region $REGION
 
- 
-
- 
-
- 
 
 # Wait for the volume to detach
 aws ec2 wait volume-available --volume-ids $CURRENT_ROOT_VOLUME_ID --region $REGION
@@ -215,10 +172,6 @@ fi
  
 
 echo "Current root volume $CURRENT_ROOT_VOLUME_ID detached."
-
- 
-
- 
 
  
 
@@ -248,9 +201,6 @@ sudo systemctl stop mysql
 sudo systemctl status mysql
 
  
-
- 
-
 # Backup the original configuration file
 sudo mv /etc/mysql/mariadb.conf/50-server.cnf /etc/mysql/mariadb.conf/50-server.bk$DATE
 
