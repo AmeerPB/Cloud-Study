@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Variables
-INSTANCE_ID="i-09effd98992fe5275"  # Replace with your test1 instance ID
-VOLUME_ID="vol-04f5f72567df93c1c"  # Replace with your volume ID to snapshot
+INSTANCE_ID="i-XXXXXXXXXXXXX"  # Replace with your test1 instance ID
+VOLUME_ID="vol-XXXXXXXXXXXXX"  # Replace with your volume ID to snapshot
 REGION="ap-south-1"                # Replace with your AWS region
 DATE=$(date +'%Y%m%d-%H%M%S')
-TAG_KEY="UAT"
+TAG_KEY="XXX"
 TAG_VALUE="Development"
 
 

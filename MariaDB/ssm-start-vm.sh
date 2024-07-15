@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Variables
-INSTANCE_ID="i-0d8d7dc32424335ab"  # Replace with your test1 instance ID
-INSTANCE_2_ID="i-054dbc5e0fa6e94a8"
-VOLUME_ID="vol-0b04424c1a61eac29"  # Replace with your volume ID to snapshot
+INSTANCE_ID="i-xxxxxxxxxx"  # Replace with your test1 instance ID
+INSTANCE_2_ID="i-xxxxxxxxxx"
+VOLUME_ID="vol-xxxxxxxxxxx"  # Replace with your volume ID to snapshot
 REGION="us-west-1"                # Replace with your AWS region
 DATE=$(date +'%Y%m%d-%H%M%S')
-TAG_KEY="UAT"
+TAG_KEY="XXX"
 TAG_VALUE="Development"
 AUTOMATION_DOCUMENT_NAME="NewRunbook"
 MAX_CHECK_TIME=600  # 600 seconds = 10 minutes
