@@ -25,14 +25,7 @@ pipeline {
                                  remote.user = uat
 
                                  remote.identityFile = Bastion
-
-                                 stage("") {
-
                                      sshCommand remote: remote, command: 'bash /home/uat/uat-eks-scaling/uat-cluster-details.sh'
-
-                                     
-
-                                    }  
 
                            }
 
