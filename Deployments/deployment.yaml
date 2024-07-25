@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: remove-background-app-deployment
+  namespace: ${NAMESPACE}
+spec:
+  replicas: ${REPLICAS}
+   spec:
+      containers:
+      - name: remove-background-app
+        image: ${ECR_REPOSITORY_URI}:${IMAGE_TAG}
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: "${POD_CPU_LIMIT}"
+            memory: "${POD_MEMORY_LIMIT}"
+          requests:
+            cpu: "${POD_CPU}"
+            memory: "${POD_MEMORY}"
+        ports:
+        - containerPort: 7000
+      tolerations:
+        - key: Name
+          operator: Equal
+          value: rembg
+          effect: NoSchedule
