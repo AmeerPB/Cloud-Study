@@ -12,20 +12,20 @@ pipeline {
 
                          def remote = [:]
 
-                         remote.name = "bastion"
+                         remote.name = "testAppServer"
 
-                         remote.host = "15.206.94.197"
+                         remote.host = "IP"
 
-                         remote.port = 8288
+                         remote.port = PORT
 
                          remote.allowAnyHosts = true
 
-                         withCredentials([sshUserPrivateKey(credentialsId: 'Bastion', keyFileVariable: 'Bastion', usernameVariable: 'uat')]) {
+                         withCredentials([sshUserPrivateKey(credentialsId: 'testAppServer', keyFileVariable: 'testAppServer', usernameVariable: 'testDev')]) {
 
-                                 remote.user = uat
+                                 remote.user = testDev
 
-                                 remote.identityFile = Bastion
-                                     sshCommand remote: remote, command: 'bash /home/uat/uat-eks-scaling/uat-cluster-details.sh'
+                                 remote.identityFile = testAppServer
+                                     sshCommand remote: remote, command: 'bash /home/testDev/testDev-eks-scaling/testDev-cluster-details.sh'
 
                            }
 
