@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     def remote = [:]
-                    remote.name = "<USERNAME>"
+                    remote.name = "<REMOTE-NAME>" # Just a descriptive name, no need for username
                     remote.host = "<IP_ADDR>"
                     remote.port = <PORT>
                     remote.allowAnyHosts = true
