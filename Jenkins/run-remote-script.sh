@@ -9,7 +9,7 @@ pipeline {
                     remote.host = "<IP_ADDR>"
                     remote.port = <PORT>
                     remote.allowAnyHosts = true
-                    withCredentials([sshUserPrivateKey(credentialsId: 'Testserver', keyFileVariable: 'keyFile', usernameVariable: 'user')]) {
+                    withCredentials([sshUserPrivateKey(credentialsId: '<CREDENTIAL-ID>', keyFileVariable: 'keyFile', usernameVariable: 'user')]) {
                         remote.user = user
                         remote.identityFile = keyFile
                         sshCommand remote: remote, command: 'bash /home/ec2-user/test.sh'
