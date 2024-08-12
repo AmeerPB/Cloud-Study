@@ -1,1 +1,33 @@
-# test file
+  nginx:
+    image: nginx:1.27.0-alpine
+    container_name: nginx
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8090:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./nginx/index.html:/usr/share/nginx/html/index.html
+      - nginx_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.entrypoints=http"
+      - "traefik.http.routers.nginx.rule=Host(`nginx.xsec.in`)"
+      - "traefik.http.routers.nginx-secure.entrypoints=https"
+      - "traefik.http.routers.nginx-secure.rule=Host(`nginx.xsec.in`)"
+#      - "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.nginx-secure.tls=true"
+      - "traefik.http.routers.nginx-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.nginx-secure.tls.domains[0].main=xsec.in"
+      - "traefik.http.routers.nginx-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.nginx.loadbalancer.server.port=8080"
+
+networks:
+  proxy:
+    name: proxy
+    external: true
+
+volumes:
+  nginx_data:
+    external: true
