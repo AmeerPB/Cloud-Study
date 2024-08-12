@@ -2,8 +2,8 @@
 
 
 > [!NOTE]
-
-### Portainer with traefik docker-compose
+>
+> ### Portainer with traefik docker-compose
 
 
 ``` yaml
