@@ -84,7 +84,7 @@ volumes:
 ```
 
 > [!NOTE]
-#### Working docker-compose.yml with multiple containers with Traefik
+> #### Working docker-compose.yml with multiple containers with Traefik
 
 
 ``` yaml
