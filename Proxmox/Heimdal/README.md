@@ -1,0 +1,41 @@
+
+#### Docker-compose
+
+``` yaml
+
+---
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /path/to/heimdall/config:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+
+
+
+```
+
+Docker-compose with traefik
+
+
+``` yaml
+
+
+
+
+```
+
+
+
+
+
+
+
