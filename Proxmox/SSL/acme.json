@@ -1,0 +1,30 @@
+{
+    "cloudflare": {
+      "Account": {
+        "Email": "xxxxxxxx@outlook.com",
+        "Registration": {
+          "body": {
+            "status": "valid",
+            "contact": [
+              "mailto:xxxxxxxx@outlook.com"
+            ]
+          },
+          "uri": "https://acme-v02.api.letsencrypt.org/acme/acct/1882220426"
+        },
+        "PrivateKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx==",
+        "KeyType": "4096"
+      },
+      "Certificates": [
+        {
+          "domain": {
+            "main": "xsec.in",
+            "sans": [
+              "*.xsec.in"
+            ]
+          },
+          "certificate": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "key": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "Store": "default"
+        }
+      ]
+    }
