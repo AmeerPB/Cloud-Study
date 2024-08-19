@@ -7,19 +7,19 @@
 
 
 #### update software repositories
-￼```sudo apt update```
+```sudo apt update```
 
 #### install available software updates
-```￼sudo apt upgrade -y```
+```sudo apt upgrade -y```
 
 #### install prerequisites
-```￼sudo apt install curl wget zip git -y```
+```sudo apt install curl wget zip git -y```
 
 #### install Apache HTTPD and MySQL
-```￼sudo apt install apache2 mariadb-server mariadb-client -y```
+```sudo apt install apache2 mariadb-server mariadb-client -y```
 
 #### install PHP components
-```￼sudo apt install php php-curl php-common php-gmp php-mbstring php-gd php-xml php-mysql php-ldap php-pear -y```
+```sudo apt install php php-curl php-common php-gmp php-mbstring php-gd php-xml php-mysql php-ldap php-pear -y```
 
 #### configure the MySQL database
 
@@ -36,27 +36,27 @@ mysql -u root -p
 
 ```bash
 CREATE DATABASE php_ipam;
-￼GRANT ALL ON php_ipam.* to 'php_ipam_rw'@'localhost' IDENTIFIED BY 'P4P1p@m!!';
-￼FLUSH PRIVILEGES;
-￼EXIT;
-￼exit
+GRANT ALL ON php_ipam.* to 'php_ipam_rw'@'localhost' IDENTIFIED BY 'P4P1p@m!!';
+FLUSH PRIVILEGES;
+EXIT;
+exit
 
 ```
 
 
 
 #### git clone phpipam to the webroot
-```￼sudo git clone https://github.com/phpipam/phpipam.git /var/www/html/phpipam```
+```sudo git clone https://github.com/phpipam/phpipam.git /var/www/html/phpipam```
 #### cd into the new directory
-￼```cd /var/www/html/phpipam```
+```cd /var/www/html/phpipam```
 #### checkout the latest release
-￼```sudo git checkout "$(git tag --sort=v:tag | tail -n1)"```
+```sudo git checkout "$(git tag --sort=v:tag | tail -n1)"```
 #### set the owner of the phpipam directory
-￼```sudo chown -R www-data:www-data /var/www/html/phpipam```
+```sudo chown -R www-data:www-data /var/www/html/phpipam```
 #### copy sample config file
-￼```sudo cp /var/www/html/phpipam/config.dist.php /var/www/html/phpipam/config.php```
+```sudo cp /var/www/html/phpipam/config.dist.php /var/www/html/phpipam/config.php```
 #### edit config.php
-￼```sudo vim /var/www/html/phpipam/config.php```
+```sudo vim /var/www/html/phpipam/config.php```
 
 
 
@@ -77,17 +77,17 @@ $db['port'] = 3306;
 
 
 #### enable mod_rewrite
-￼```sudo a2enmod rewrite```
+```sudo a2enmod rewrite```
 #### restart apache2 service
-￼```sudo systemctl restart apache2```
+```sudo systemctl restart apache2```
 
 
 #### phpIPAM Web Installer
-￼Open a web browser and navigate to http://DNSorIP/phpipam  
-￼The phpipam Installation web installer should be load  
-￼Click the New phpipam installation button  
-￼Click the Automatic database installation button
-￼Complete the database form as follows
+Open a web browser and navigate to http://DNSorIP/phpipam  
+The phpipam Installation web installer should be load  
+Click the New phpipam installation button  
+Click the Automatic database installation button  
+Complete the database form as follows  
 
 ```json
 MySQL/MariaDB username: php_ipam_rw
@@ -96,13 +96,13 @@ MySQL/MariaDB database location: 127.0.0.1
 MySQL/MariaDB database name: php_ipam
 ```
 
-￼Click the Show advanced options button
-￼Uncheck Create new database and Set permissions to tables > Click the Install phpipam database button
-￼Once the database is initialized, click the Continue button
-￼Enter and confirm an admin user password > Click Save settings
-￼Click the Proceed to login button
-￼Login with the username admin and the admin password set earlier
-￼Welcome to phpIPAM
+Click the Show advanced options button  
+Uncheck Create new database and Set permissions to tables > Click the Install phpipam database button  
+Once the database is initialized, click the Continue button  
+Enter and confirm an admin user password > Click Save settings  
+Click the Proceed to login button  
+Login with the username admin and the admin password set earlier  
+Welcome to phpIPAM  
 
 
 
