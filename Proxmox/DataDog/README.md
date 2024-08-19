@@ -19,7 +19,7 @@ gcr.io/datadoghq/agent:7
 
 > [!WARNING]
 >
-> Didn't work as expected.
+> Didn't work as expected.\n
 > The DD webpage didnt recognised as an agent is installed on the Host
 
 ``` yaml
