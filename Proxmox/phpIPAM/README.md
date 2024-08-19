@@ -83,11 +83,11 @@ $db['port'] = 3306;
 
 
 #### phpIPAM Web Installer
-Open a web browser and navigate to http://DNSorIP/phpipam  
-The phpipam Installation web installer should be load  
-Click the New phpipam installation button  
-Click the Automatic database installation button  
-Complete the database form as follows  
+- Open a web browser and navigate to http://DNSorIP/phpipam  
+- The phpipam Installation web installer should be load  
+- Click the New phpipam installation button  
+- Click the Automatic database installation button  
+- Complete the database form as follows 
 
 ```json
 MySQL/MariaDB username: php_ipam_rw
