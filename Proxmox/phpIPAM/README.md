@@ -96,13 +96,13 @@ MySQL/MariaDB database location: 127.0.0.1
 MySQL/MariaDB database name: php_ipam
 ```
 
-Click the Show advanced options button  
-Uncheck Create new database and Set permissions to tables > Click the Install phpipam database button  
-Once the database is initialized, click the Continue button  
-Enter and confirm an admin user password > Click Save settings  
-Click the Proceed to login button  
-Login with the username admin and the admin password set earlier  
-Welcome to phpIPAM  
+- Click the Show advanced options button  
+- Uncheck Create new database and Set permissions to tables > Click the Install phpipam database button  
+- Once the database is initialized, click the Continue button  
+- Enter and confirm an admin user password > Click Save settings  
+- Click the Proceed to login button  
+- Login with the username admin and the admin password set earlier  
+- Welcome to phpIPAM 
 
 
 
