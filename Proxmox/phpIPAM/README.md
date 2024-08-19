@@ -89,7 +89,7 @@ $db['port'] = 3306;
 - Click the Automatic database installation button  
 - Complete the database form as follows 
 
-```json
+```bash
 MySQL/MariaDB username: php_ipam_rw
 MySQL/MariaDB password: P4P1p@m!!
 MySQL/MariaDB database location: 127.0.0.1
