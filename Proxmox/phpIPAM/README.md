@@ -83,9 +83,9 @@ $db['port'] = 3306;
 
 
 #### phpIPAM Web Installer
-￼Open a web browser and navigate to http://DNSorIP/phpipam
-￼The phpipam Installation web installer should be load
-￼Click the New phpipam installation button
+￼Open a web browser and navigate to http://DNSorIP/phpipam  
+￼The phpipam Installation web installer should be load  
+￼Click the New phpipam installation button  
 ￼Click the Automatic database installation button
 ￼Complete the database form as follows
 
