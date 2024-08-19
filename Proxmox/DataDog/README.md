@@ -17,7 +17,7 @@ gcr.io/datadoghq/agent:7
 
 #### Docker-compose file for DD
 
-> [!WARN]
+> [!WARNING]
 >
 > Didn't work as expected
 > The DD webpage didnt recognised as an agent is installed on the Host
