@@ -4,6 +4,7 @@
 
 ```yaml
 docker run -d --name dd-agent \
+--restart unless-stopped \
 -e DD_API_KEY=xxxxxxxxxxxxxxx \
 -e DD_SITE="us5.datadoghq.com" \
 -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
