@@ -117,3 +117,269 @@ volumes:
 
 
 ```
+
+
+#### Multiple NGINX containers with docker-compose
+
+
+
+Version -1
+
+```yaml
+
+services:
+  nginx:
+    image: nginx:1.27.0-alpine
+    container_name: nginx1
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8090:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./site1/index.html:/usr/share/nginx/html/index.html
+      - site1_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.entrypoints=http"
+      - "traefik.http.routers.nginx.rule=Host(`website1.xsec.in`)"
+      - "traefik.http.routers.nginx-secure.entrypoints=https"
+      - "traefik.http.routers.nginx-secure.rule=Host(`website.xsec.in`)"
+#      - "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.nginx-secure.tls=true"
+      - "traefik.http.routers.nginx-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.nginx-secure.tls.domains[0].main=xsec.in"
+      - "traefik.http.routers.nginx-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
+
+  nginx2:
+    image: nginx:1.27.0-alpine
+    container_name: nginx2
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8095:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./site2/:/usr/share/nginx/html/
+      - site2_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx2.entrypoints=http"
+      - "traefik.http.routers.nginx2.rule=Host(`website2.xsec.in`)"
+      - "traefik.http.routers.nginx2-secure.entrypoints=https"
+      - "traefik.http.routers.nginx2-secure.rule=Host(`website2.xsec.in`)"
+#      - "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.nginx2-secure.tls=true"
+      - "traefik.http.routers.nginx2-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.nginx2-secure.tls.domains[0].main=xsec.in"
+      - "traefik.http.routers.nginx2-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.nginx2.loadbalancer.server.port=80"
+
+
+# Without SSL
+
+  nginx3:
+    image: nginx:1.27.0-alpine
+    container_name: nginx3
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8096:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./site3/:/usr/share/nginx/html/
+      - site3_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx3.entrypoints=http"
+      - "traefik.http.routers.nginx3.rule=Host(`website3.xsec.in`)"
+      #- "traefik.http.routers.nginx3-secure.entrypoints=https"
+      #- "traefik.http.routers.nginx3-secure.rule=Host(`website.xsec.in`)"
+      #- "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
+      #- "traefik.http.routers.nginx3-secure.tls=true"
+      #- "traefik.http.routers.nginx3-secure.tls.certresolver=cloudflare"
+      #- "traefik.http.routers.nginx3-secure.tls.domains[0].main=xsec.in"
+      #- "traefik.http.routers.nginx3-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.nginx3.loadbalancer.server.port=80"
+
+# With SSL and AUTH
+
+  nginx4:
+    image: nginx:1.27.0-alpine
+    container_name: nginx4
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8097:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./site4/:/usr/share/nginx/html/
+      - site4_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx4.entrypoints=http"
+      - "traefik.http.routers.nginx4.rule=Host(`website4.xsec.in`)"
+      - "traefik.http.routers.nginx4-secure.entrypoints=https"
+      - "traefik.http.routers.nginx4-secure.rule=Host(`website4.xsec.in`)"
+      - "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.nginx4-secure.tls=true"
+      - "traefik.http.routers.nginx4-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.nginx4-secure.tls.domains[0].main=xsec.in"
+      - "traefik.http.routers.nginx4-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.nginx4.loadbalancer.server.port=80"
+
+networks:
+  proxy:
+    name: proxy
+    external: true
+
+volumes:
+  site1_data:
+    external: true
+  site2_data:
+    external: true
+  site3_data:
+    external: true
+  site4_data:
+    external: true
+
+```
+
+
+Version -2
+
+```yaml
+
+services:
+  nginx:
+    image: nginx:1.27.0-alpine
+    container_name: nginx1
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8090:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./site1/index.html:/usr/share/nginx/html/index.html
+      - site1_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.entrypoints=http"
+      - "traefik.http.routers.nginx.rule=Host(`website1.xsec.in`)"
+      - "traefik.http.routers.nginx-secure.entrypoints=https"
+      - "traefik.http.routers.nginx-secure.rule=Host(`website.xsec.in`)"
+#      - "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.nginx-secure.tls=true"
+      - "traefik.http.routers.nginx-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.nginx-secure.tls.domains[0].main=xsec.in"
+      - "traefik.http.routers.nginx-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
+
+  nginx2:
+    image: nginx:1.27.0-alpine
+    container_name: nginx2
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8095:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./site2/:/usr/share/nginx/html/
+      - site2_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx2.entrypoints=http"
+      - "traefik.http.routers.nginx2.rule=Host(`website2.xsec.in`)"
+      - "traefik.http.routers.nginx2-secure.entrypoints=https"
+      - "traefik.http.routers.nginx2-secure.rule=Host(`website2.xsec.in`)"
+#      - "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.nginx2-secure.tls=true"
+      - "traefik.http.routers.nginx2-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.nginx2-secure.tls.domains[0].main=xsec.in"
+      - "traefik.http.routers.nginx2-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.nginx2.loadbalancer.server.port=80"
+
+
+# Without SSL
+
+  nginx3:
+    image: nginx:1.27.0-alpine
+    container_name: nginx3
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8096:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./site3/:/usr/share/nginx/html/
+      - site3_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx3.entrypoints=http"
+      - "traefik.http.routers.nginx3.rule=Host(`website3.xsec.in`)"
+      #- "traefik.http.routers.nginx3-secure.entrypoints=https"
+      #- "traefik.http.routers.nginx3-secure.rule=Host(`website.xsec.in`)"
+      #- "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
+      #- "traefik.http.routers.nginx3-secure.tls=true"
+      #- "traefik.http.routers.nginx3-secure.tls.certresolver=cloudflare"
+      #- "traefik.http.routers.nginx3-secure.tls.domains[0].main=xsec.in"
+      #- "traefik.http.routers.nginx3-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.nginx3.loadbalancer.server.port=80"
+
+# With SSL and AUTH
+
+  nginx4:
+    image: nginx:1.27.0-alpine
+    container_name: nginx4
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8097:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./site4/:/usr/share/nginx/html/
+      - site4_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx4.entrypoints=http"
+      - "traefik.http.routers.nginx4.rule=Host(`website4.xsec.in`)"
+      - "traefik.http.routers.nginx4-secure.entrypoints=https"
+      - "traefik.http.routers.nginx4-secure.rule=Host(`website4.xsec.in`)"
+      - "traefik.http.routers.nginx4-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.nginx4-secure.tls=true"
+      - "traefik.http.routers.nginx4-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.nginx4-secure.tls.domains[0].main=xsec.in"
+      - "traefik.http.routers.nginx4-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.nginx4.loadbalancer.server.port=80"
+
+networks:
+  proxy:
+    name: proxy
+    external: true
+
+volumes:
+  site1_data:
+    external: true
+  site2_data:
+    external: true
+  site3_data:
+    external: true
+  site4_data:
+    external: true
+
+```
+
+
+
+
+
+
