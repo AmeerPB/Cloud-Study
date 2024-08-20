@@ -1,6 +1,50 @@
 #### Deployment files for Portainer that goes with Traefik
 
 
+#### Portainer docker-compose.yml
+
+```yaml
+services:
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.entrypoints=http"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.xsec.in`)"
+      - "traefik.http.middlewares.portainer-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.routers.portainer.middlewares=portainer-https-redirect"      
+      - "traefik.http.routers.portainer-secure.entrypoints=https"
+      - "traefik.http.routers.portainer-secure.rule=Host(`portainer.xsec.in`)"
+      #- "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.portainer-secure.tls=true"
+      - "traefik.http.routers.portainer-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.portainer-secure.tls.domains[0].main=xsec.in"
+      - "traefik.http.routers.portainer-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+networks:
+  proxy:
+    name: proxy
+    external: true
+volumes:
+  portainer_data:
+    external: true
+
+```
+
+
+
+
+
 > [!NOTE]
 >
 > ### Portainer with traefik docker-compose
