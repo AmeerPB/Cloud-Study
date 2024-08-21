@@ -223,7 +223,7 @@ accessLog:
 > 
 > See the rest of the Jaeger and openTelemetry docker-compose.yml and config files for a complete setup artifacts
 
-
+`docker-compose.yml`
 
 ``` yaml
 services:
