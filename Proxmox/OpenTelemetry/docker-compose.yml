@@ -1,0 +1,22 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector
+    restart: unless-stopped
+    ports:
+      - "55680:55680"  # Default OTLP receiver port
+      - "4317:4317"    # gRPC receiver port for OTLP
+    volumes:
+      - ./config.yml:/otel-config.yml
+    command: ["--config", "/otel-config.yml"]
+
+#networks:
+#  default:
+#    external:
+#      name: proxy
+#
+
+#networks:
+#  proxy:
+#    name: proxy
+#    external: true

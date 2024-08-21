@@ -1,0 +1,23 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+#exporters:
+#  jaeger:
+#    endpoint: "192.168.1.20:14250"  # Replace with your Jaeger endpoint if used
+
+exporters:
+  otlphttp:
+    endpoint: "http://192.168.1.20:14250"  # Jaeger HTTP endpoint for traces
+
+processors:
+  batch:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp]
