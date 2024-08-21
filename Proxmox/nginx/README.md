@@ -273,7 +273,7 @@ services:
       - "traefik.http.routers.nginx.entrypoints=http"
       - "traefik.http.routers.nginx.rule=Host(`website1.xsec.in`)"
       - "traefik.http.routers.nginx-secure.entrypoints=https"
-      - "traefik.http.routers.nginx-secure.rule=Host(`website.xsec.in`)"
+      - "traefik.http.routers.nginx-secure.rule=Host(`website1.xsec.in`)"
 #      - "traefik.http.routers.portainer-secure.middlewares=traefik-auth"
       - "traefik.http.routers.nginx-secure.tls=true"
       - "traefik.http.routers.nginx-secure.tls.certresolver=cloudflare"
