@@ -2,7 +2,7 @@
 
 #### Step 1. Install kibana
 
-- Install elasticsearch first OR add the easltic repo details in apt. Otherwise kibana package will not be available
+- Install elasticsearch first OR add the elastic repo details in apt. Otherwise kibana package will not be available
 
 ```bash
 
