@@ -2,6 +2,11 @@
 
 #### Step 1. Install ElasticSearch
 
+> [!NOTE]
+> 
+> This install command will display the elastic built-in superuser password in the installation log.
+
+
 ```bash
 
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
@@ -10,10 +15,7 @@ echo "deb https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee 
 sudo apt-get update && sudo apt-get install elasticsearch
 
 ```
-> [!NOTE]
-> 
-> The above install command will display the elastic built-in superuser password in the installation log.
-
+  
 
 > [!NOTE]
 > 
