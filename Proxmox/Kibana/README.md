@@ -2,6 +2,19 @@
 
 #### Step 1. Install kibana
 
+- Install elasticsearch first OR add the easltic repo details in apt. Otherwise kibana package will not be available
+
+```bash
+
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo "deb https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list
+sudo apt-get update && sudo apt-get install elasticsearch
+
+```
+
+
+
 `apt install kibana`
 
 
