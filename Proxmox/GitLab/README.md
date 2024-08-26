@@ -6,6 +6,7 @@ services:
   gitlab:
     image: 'gitlab/gitlab-ce:latest'
     container_name: gitlab
+    hostname: gitlab.xsec.in
     restart: always
     ports:
       - '8070:80'
