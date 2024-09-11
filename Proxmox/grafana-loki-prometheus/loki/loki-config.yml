@@ -28,3 +28,9 @@ schema_config:
 
 ruler:
   alertmanager_url: http://localhost:9093
+
+    # Ifyou wanted to increase the default sie of the max entries limit configuration, 
+    # Then uncomment the followng lines
+    #
+    # limits_config:
+    #  max_entries_limit: 100000  # Adjust this number as needed    
