@@ -95,11 +95,3 @@ elasticsearch.username: "kibana_user"
 elasticsearch.password: "your_password"
 
 ```
-
-
-
-
-
-
-
-
