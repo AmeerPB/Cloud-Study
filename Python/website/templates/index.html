@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Runner</title>
+    <script>
+        function startStreaming() {
+            const eventSource = new EventSource('/stream_all_combine');
+            const outputDiv = document.getElementById('output');
+            outputDiv.textContent = '';  // Clear previous output
+            
+            eventSource.onmessage = function(event) {
+                outputDiv.textContent += event.data + '\n';
+            };
+            
+            eventSource.onerror = function() {
+                outputDiv.textContent += 'An error occurred while streaming.\n';
+                eventSource.close();
+            };
+        }
+    </script>
+</head>
+<body>
+    <h1>Bash Script Runner</h1>
+    <ul>
+        {% for script in scripts %}
+            <li>
+                <form action="/run/{{ script }}">
+                    <button type="submit">{{ script }}</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Button to run all combine.sh scripts -->
+    <button onclick="startStreaming()">Run All combine.sh Scripts</button>
+    <pre id="output"></pre>
+</body>
+</html>
+

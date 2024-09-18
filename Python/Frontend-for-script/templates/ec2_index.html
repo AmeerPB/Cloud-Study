@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC2 Overview</title>
+    <style>
+        .container {
+            text-align: center;
+            margin: 20px;
+        }
+        .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EC2 Overview</h1>
+        <a href="{{ url_for('ec2.ec2_all') }}" class="btn">All Instances</a>
+        <a href="{{ url_for('ec2.ec2_overprovisioned') }}" class="btn">Overprovisioned Instances</a>
+        <a href="{{ url_for('ec2.ec2_stopped') }}" class="btn">Stopped Instances</a>
+    </div>
+</body>
+</html>

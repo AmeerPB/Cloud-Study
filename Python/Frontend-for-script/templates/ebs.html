@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS Volumes and Snapshots</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EBS Volumes and Snapshots</h1>
+        
+        <h2>GP2 Volumes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Volume ID</th>
+                    <th>Availability Zone</th>
+                    <th>Size (GB)</th>
+                    <th>Volume Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for volume in volumes %}
+                <tr>
+                    <td>{{ volume.id }}</td>
+                    <td>{{ volume.availability_zone }}</td>
+                    <td>{{ volume.size }}</td>
+                    <td>{{ volume.type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Snapshots</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Snapshot ID</th>
+                    <th>Created Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for snapshot in snapshots %}
+                <tr>
+                    <td>{{ snapshot.id }}</td>
+                    <td>{{ snapshot.start_time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

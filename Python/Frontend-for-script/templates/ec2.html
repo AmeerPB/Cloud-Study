@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC2 Instances</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EC2 Instances</h1>
+        
+        <h2>All Instances</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Instance ID</th>
+                    <th>Name</th>
+                    <th>Instance Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for instance in instances %}
+                <tr>
+                    <td>{{ instance.id }}</td>
+                    <td>{{ instance.name }}</td>
+                    <td>{{ instance.type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Overprovisioned Instances</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Instance ID</th>
+                    <th>Instance Name</th>
+                    <th>Finding</th>
+                    <th>Finding Reason Codes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recommendation in recommendations %}
+                <tr>
+                    <td>{{ recommendation.id }}</td>
+                    <td>{{ recommendation.name }}</td>
+                    <td>{{ recommendation.finding }}</td>
+                    <td>{{ recommendation.reasons }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Stopped Instances</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Instance ID</th>
+                    <th>Launch Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for instance in stopped_instances %}
+                <tr>
+                    <td>{{ instance.id }}</td>
+                    <td>{{ instance.launch_time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
