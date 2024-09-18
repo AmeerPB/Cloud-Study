@@ -105,8 +105,9 @@ MySQL/MariaDB database name: php_ipam
 - Welcome to phpIPAM 
 
 
-> [!WARN]
-### Dockerise the phpIPAM
+> [!WARNING]
+> 
+> ### Dockerise the phpIPAM
 
 1. Dockerfile
 
