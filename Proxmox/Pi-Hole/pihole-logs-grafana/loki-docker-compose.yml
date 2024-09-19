@@ -1,0 +1,30 @@
+services:
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    networks:
+      - proxy
+    volumes:
+      - loki-data:/loki
+    ports:
+      - "30001:3100"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.loki.entrypoints=http"
+      - "traefik.http.routers.loki.rule=Host(`loki.xsec.in`)"
+      - "traefik.http.routers.loki-secure.entrypoints=https"
+      - "traefik.http.routers.loki-secure.rule=Host(`loki.xsec.in`)"
+      - "traefik.http.routers.loki-secure.tls=true"
+      - "traefik.http.routers.loki-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.loki-secure.tls.domains[0].main=xsec.in"
+      - "traefik.http.routers.loki-secure.tls.domains[0].sans=*.xsec.in"
+      - "traefik.http.services.loki.loadbalancer.server.port=3100"
+    restart: always
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  loki-data:
+    external: true

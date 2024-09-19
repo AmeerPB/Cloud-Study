@@ -1,0 +1,37 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /var/log/promtail-positions.yaml
+
+clients:
+  - url: http://loki.xsec.in/loki/api/v1/push
+
+scrape_configs:
+  # Scrape Pi-Hole FTL logs, including rotated logs
+  - job_name: "pihole-FTL"
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: pihole-FTL
+          __path__: /var/log/pihole/FTL.log*
+
+  # Scrape Pi-Hole main logs, including rotated logs
+  - job_name: "pihole-main"
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: pihole-main
+          __path__: /var/log/pihole/pihole.log*
+
+  # Scrape system logs
+  - job_name: "system"
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          __path__: /var/log/messages
