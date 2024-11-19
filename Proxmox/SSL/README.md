@@ -67,4 +67,8 @@
 > echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" | base64 --decode > /etc/pve/local/pve-ssl.key
 > 
 > ```
+> After addin both the keys, restart the pveproxy
+> ``` bash
+> systemctl restart pveproxy.service && systemctl status pveproxy.service
+> ```
 
